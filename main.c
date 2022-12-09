@@ -6,7 +6,7 @@
 /*   By: schoukou <schoukou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 10:52:06 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 20:17:37 by schoukou         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:21:40 by schoukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,45 @@ t_g    *init_globals()
     g->take_the_map = 6;
     return (g);
 }
-
+void	check_texture(t_cubd *cub)
+{
+    if (cub->texture[0].img == NULL)
+	{
+		printf("error texture");
+		exit(1);
+	}
+    if (cub->texture[1].img == NULL)
+	{
+		printf("error texture");
+		exit(1);
+	}
+	if (cub->texture[2].img == NULL)
+	{
+		printf("error texture");
+		exit(1);
+	}
+	if (cub->texture[3].img == NULL)
+	{
+		printf("error texture");
+		exit(1);
+    }
+}
 void    draw(t_cubd *cub)
 {
     int i;
     int x;
 
     cub->texture[0].img = mlx_xpm_file_to_image(cub->mlx, cub->no, &i, &x);
-    if(cub->texture[0].img == NULL)
-        exit(1);
+    check_texture(cub);
     cub->texture[0].add = mlx_get_data_addr(cub->texture[0].img, &cub->texture[0].bp, &cub->texture[0].len, &cub->texture[0].end);
     cub->texture[1].img = mlx_xpm_file_to_image(cub->mlx, cub->ea, &i, &x);
-    if(cub->texture[1].img == NULL)
-        exit(1);
+    check_texture(cub);
     cub->texture[1].add = mlx_get_data_addr(cub->texture[1].img, &cub->texture[1].bp, &cub->texture[1].len, &cub->texture[0].end);
     cub->texture[2].img = mlx_xpm_file_to_image(cub->mlx, cub->we, &i, &x);
-    if(cub->texture[2].img == NULL)
-        exit(1);
+    check_texture(cub);
     cub->texture[2].add = mlx_get_data_addr(cub->texture[2].img, &cub->texture[2].bp, &cub->texture[2].len, &cub->texture[0].end);
     cub->texture[3].img = mlx_xpm_file_to_image(cub->mlx, cub->so, &i, &x);
-    if(cub->texture[3].img == NULL)
-        exit(1);
+    check_texture(cub);
     cub->texture[3].add = mlx_get_data_addr(cub->texture[3].img, &cub->texture[3].bp, &cub->texture[3].len, &cub->texture[0].end);
     draw_rays(cub);
     generate3d(cub);
