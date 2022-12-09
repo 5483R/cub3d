@@ -13,21 +13,21 @@ SRC = main.c \
 	 ./2DMAP/get_info.c \
 	 ./2DMAP/drw_2d_map.c \
 	 ./raycast/raycast.c \
-	 ./genrate3d.c
-FLAGS =# -Wall -Wextra -Werror -fsanitize=address
-FLA = -lmlx -framework OpenGL -framework AppKit #-fsanitize=address
+	 ./genrate3d.c \
+	 ./generate3d_2.c
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLA = -lmlx -framework OpenGL -O3 -framework AppKit #-fsanitize=address
 ARG = -o
-#-fsanitize=address
 all : $(NAME)
 
 $(NAME): $(SRC)
-	make -C ./libftt
-	$(CC) $(FLAGS) $(FLA) $(SRC) $(ARG) $(NAME) ./libftt/libft.a
+	@make -C ./libftt
+	@$(CC) $(FLAGS) $(FLA) $(SRC) $(ARG) $(NAME) ./libftt/libft.a
 
 clean :
-	cd libftt && rm -rf *.o
-	rm -rf CUB3D.dSYM
-	rm -f $(NAME)
+	@cd libftt && rm -rf *.o
+	@rm -rf CUB3D.dSYM
+	@rm -f $(NAME)
 
 fclean : clean
 

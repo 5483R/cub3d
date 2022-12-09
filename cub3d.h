@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schoukou <schoukou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:09:58 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/05 22:02:23 by schoukou         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:08:23 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,4 @@
 # define NUM_RAYS (WIN_WITH)
 # define TILE_SIZE 64
 
-
-
-//////////////////////////
-// typedef struct cub3d_t
-// {
-//     void	*mlx;
-// 	void	*win;
-//     int     x_player;
-//     int     y_player;
-//     char    direction;
-//     int     f_col[2];
-//     int     c_col[2];
-//     char    **map;
-//     char    **info;
-//     char    *NO;
-//     char    *SO;
-//     char    *EA;
-//     char    *WE;
-// }   cub3d_t;
-
-// typedef struct nd_t
-// {
-// 	void	*hero;
-// 	void	*colec;
-// 	void	*exi;
-// }   nd_t;
-/////////////////////////////////////
-cub3d_t *init_cub(char *str);
 #endif
