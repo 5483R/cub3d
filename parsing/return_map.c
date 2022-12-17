@@ -6,46 +6,11 @@
 /*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 11:14:49 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 17:10:52 by ael-kouc         ###   ########.fr       */
+/*   Updated: 2022/12/13 14:23:45 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	exit_mssg(char *str)
-{
-	ft_putstr(str);
-	exit(1);
-}
-
-char	*line_map(int fd)
-{
-	char	*line;
-	char	*map;
-	char	*tmp;
-
-	map = ft_strdup("");
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		tmp = map;
-		map = ft_strjoin(map, line);
-		free(tmp);
-		free(line);
-	}
-	close(fd);
-	return (map);
-}
-
-void	err_fre_lex_cub(t_lexer *lexer, t_cubd *cub)
-{
-	free(lexer->src);
-	free(lexer);
-	free(cub);
-	exit_mssg("INVALID MAP !!\n");
-}
 
 int	norm_filinfo1(t_cubd *cub, t_lexer *lexer, t_g *g)
 {
@@ -97,6 +62,7 @@ void	fill_info(t_cubd *cub, char *map)
 {
 	t_lexer	*lexer;
 	t_g		*g;
+
 	g = init_globals();
 	lexer = init_lexer(map);
 	free(map);
@@ -134,16 +100,20 @@ t_cubd	*return_map(char *av, t_cubd *cub)
 {
 	char	*map;
 	int		fd;
+	int		i;
 
 	verif_name_folder(av, cub);
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 	{
-		free(cub);
 		printf("error\n");
 		exit(1);
 	}
 	map = change_value(line_map(fd));
 	fill_info(cub, map);
+	i = lent_double_p(cub->map) - 1;
+	if (i < 2)
+		exit(1);
+	check_map(cub);
 	return (cub);
 }

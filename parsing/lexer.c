@@ -6,32 +6,11 @@
 /*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 03:02:11 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 15:48:56 by ael-kouc         ###   ########.fr       */
+/*   Updated: 2022/12/10 11:07:50 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-t_lexer	*init_lexer(char *src)
-{
-	t_lexer	*lexer;
-
-	lexer = malloc(sizeof(t_lexer));
-	lexer->src = ft_strdup(src);
-	lexer->src_size = ft_strlen(src);
-	lexer->i = 0;
-	lexer->j = 0;
-	lexer->c = lexer->src[lexer->i];
-	return (lexer);
-}
-
-void	lexer_skip_space_line(t_lexer *lexer)
-{
-	while (lexer->src[lexer->i] == ' ' || lexer->src[lexer->i] == '\t'
-		|| lexer->src[lexer->i] == '\n' || lexer->src[lexer->i] == '\r'
-		|| lexer->src[lexer->i] == '~')
-		lexer_advance(lexer);
-}
 
 void	lexer_skip_space(t_lexer *lexer)
 {

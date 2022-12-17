@@ -6,7 +6,7 @@
 /*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 01:18:18 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 16:38:13 by ael-kouc         ###   ########.fr       */
+/*   Updated: 2022/12/10 09:39:18 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_map	*take_map(t_lexer *lexer)
 
 void	norm_oneplayer(t_cubd *cub, char **str, int i, int j)
 {
-	cub->x_player = (double )j;
-	cub->y_player = (double )i;
+	cub->x_p = (double )j;
+	cub->y_p = (double )i;
 	if (str[i][j] == 'N')
 		cub->ang = 1.5 * M_PI;
 	else if (str[i][j] == 'E')

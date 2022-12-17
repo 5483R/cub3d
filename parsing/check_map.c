@@ -6,49 +6,11 @@
 /*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 02:04:58 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 17:11:54 by ael-kouc         ###   ########.fr       */
+/*   Updated: 2022/12/11 10:55:16 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	skip_space_end(char *str)
-{
-	int	i;
-
-	i = ft_strlen(str) - 1;
-	while (i >= 0 && str[i] <= 32)
-		i--;
-	return (i);
-}
-
-int	skip_space_start(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] <= 32)
-		i++;
-	return (i);
-}
-
-int	check_1(char **str)
-{
-	int	i;
-	int	a;
-	int	b;
-
-	i = 1;
-	while (str[i])
-	{
-		a = skip_space_end(str[i]);
-		b = skip_space_start(str[i]);
-		if (!(str[i][a] == '1' && str[i][b] == '1'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	sur_by_walls(char **map)
 {
@@ -59,14 +21,14 @@ int	sur_by_walls(char **map)
 	j = lent_double_p(map) - 1;
 	while (map[0][a])
 	{
-		if (!(map[0][a] == ' ' || map[0][a] == '1'))
+		if (!(map[0][a] <= 32 || map[0][a] == '1'))
 			return (1);
 		a++;
 	}
 	a = 0;
 	while (map[j][a])
 	{
-		if (!(map[j][a] == ' ' || map[j][a] == '1'))
+		if (!(map[j][a] <= 32 || map[j][a] == '1'))
 			return (1);
 		a++;
 	}
@@ -82,7 +44,7 @@ int	all_element(char **map)
 	j = 0;
 	while (map[0][j])
 	{
-		if (!(map[0][j] == '~' || map[0][j] == '1' || map[0][j] == ' '))
+		if (!(map[0][j] == '~' || map[0][j] == '1' || map[0][j] <= 32))
 			return (1);
 		j++;
 	}
@@ -93,7 +55,7 @@ int	all_element(char **map)
 		{
 			if (!(map[i][j] == '1' || map[i][j] == '0'
 				|| map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W' || map[i][j] == ' '))
+				|| map[i][j] == 'W' || map[i][j] <= 32))
 				return (1);
 			j++;
 		}
@@ -113,7 +75,7 @@ void	free_cub(t_cubd *cub)
 	free_double_p(cub->map);
 }
 
-void	check_textures(t_cubd *cub)
+void	check_txs(t_cubd *cub)
 {
 	int	fd[4];
 	int	f;
@@ -135,8 +97,8 @@ void	check_textures(t_cubd *cub)
 		f += 1;
 	if (f != 0)
 	{
-		free_cub(cub);
-		exit_mssg("INVALID MAP !!");
+		free(cub);
+		exit_mssg("ERROR\n");
 	}
 	while (i < 4)
 		close(fd[i++]);
@@ -144,12 +106,12 @@ void	check_textures(t_cubd *cub)
 
 void	check_map(t_cubd *cub)
 {
-	check_textures(cub);
+	check_txs(cub);
 	if (all_element(cub->map) || sur_by_walls(cub->map)
 		|| check_1(cub->map) || check_spaces(cub->map)
 		|| one_player(cub->map, cub))
 	{
 		free_cub(cub);
-		exit_mssg("INVALID MAP !!");
+		exit_mssg("ERROR");
 	}
 }

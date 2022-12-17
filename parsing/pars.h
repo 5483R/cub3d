@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schoukou <schoukou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:40:21 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 20:11:03 by schoukou         ###   ########.fr       */
+/*   Updated: 2022/12/11 10:31:29 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARS_H
 
 # include "../cub3d.h"
+# define TOW_PI 6.28318530
+# define PI 3.14159265
 
 typedef struct t_g{
 	int	flag_no;
@@ -33,7 +35,7 @@ typedef struct t_map
 
 typedef struct s_rays
 {
-	double	rayangle;
+	double	rangl;
 	double	wallhitx;
 	double	wallhity;
 	double	distance;
@@ -46,30 +48,35 @@ typedef struct s_rays
 
 typedef struct t_norm
 {
-    int		y;
+	int		y;
 	int		x;
 	double	i;
 	int		ray;
-	int		textureoffset_x;
-	int		textureoffset_y;
+	int		txoffset_x;
+	int		txoffset_y;
 	int		distancefromtop;
-}   t_norm;
+}	t_norm;
 
-typedef struct t_texture
+typedef struct t_tx
 {
 	void	*img;
 	char	*add;
 	int		bp;
 	int		end;
 	int		len;
-}	t_texture;
+}	t_tx;
+
+typedef struct s_tood{
+	int	with;
+	int	hight;
+}	t_tood;
 
 typedef struct t_cubd
 {
 	void		*mlx;
 	void		*win;
-	double		x_player;
-	double		y_player;
+	double		x_p;
+	double		y_p;
 	double		ang;
 	char		direction;
 	int			*f_col;
@@ -81,13 +88,14 @@ typedef struct t_cubd
 	char		*no;
 	char		*so;
 	char		*ea;
+	t_tood		*todmap;
 	char		*we;
 	int			b;
 	int			l;
 	int			e;
 	void		*img;
 	int			*add;
-	t_texture	*texture;
+	t_tx		*tx;
 	t_norm		norm;
 }	t_cubd;
 
@@ -149,4 +157,5 @@ int				generate3d_sky(t_cubd *cub, int j, int ray);
 void			norm_generate3d(t_cubd *cub, int ray, double i);
 int				rgb_to_int(int r, int g, int b);
 int				direction(t_cubd *cub, int ray);
+void			check_player(char **str, int i, int j);
 #endif

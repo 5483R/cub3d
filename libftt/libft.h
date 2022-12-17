@@ -6,15 +6,16 @@
 /*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 04:25:02 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/10/26 02:26:31 by ael-kouc         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:30:25 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include <unistd.h>
-#include "../cub3d.h"
+# include <unistd.h>
+# include "../cub3d.h"
+
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 size_t	ft_strlen(const char *s);
@@ -50,6 +51,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	**ft_split(char const *s, char c);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void    ft_putstr(char *str);
+void	ft_putstr(char *str);
 
 #endif

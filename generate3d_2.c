@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate3d_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schoukou <schoukou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:53:42 by schoukou          #+#    #+#             */
-/*   Updated: 2022/12/09 20:08:29 by schoukou         ###   ########.fr       */
+/*   Updated: 2022/12/10 10:56:12 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	generate3d_floor(t_cubd *cub, int j, int ray)
 int	return_offsetx(t_cubd *cub, int ray)
 {
 	if (direction(cub, ray) == 2 || direction(cub, ray) == 4)
-		cub->norm.textureoffset_x = (int)cub->rays[ray]->wallhity % TILE_SIZE;
+		cub->norm.txoffset_x = (int)cub->rays[ray]->wallhity % TILE_SIZE;
 	else
-		cub->norm.textureoffset_x = (int)cub->rays[ray]->wallhitx % TILE_SIZE;
-	return (cub->norm.textureoffset_x);
+		cub->norm.txoffset_x = (int)cub->rays[ray]->wallhitx % TILE_SIZE;
+	return (cub->norm.txoffset_x);
 }

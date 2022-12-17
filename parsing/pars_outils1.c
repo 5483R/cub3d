@@ -6,7 +6,7 @@
 /*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 00:27:22 by ael-kouc          #+#    #+#             */
-/*   Updated: 2022/12/09 16:02:46 by ael-kouc         ###   ########.fr       */
+/*   Updated: 2022/12/11 10:38:56 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,16 @@ int	one_player(char **str, t_cubd *cub)
 	calc = 0;
 	while (str[i])
 	{
-		j = 0;
-		while (str[i][j])
+		j = -1;
+		while (str[i][++j])
 		{
 			if (str[i][j] == 'N' || str[i][j] == 'S'
 				|| str[i][j] == 'E' || str[i][j] == 'W')
 			{
+				check_player(str, i, j);
 				norm_oneplayer(cub, str, i, j);
 				calc++;
 			}
-			j++;
 		}
 		i++;
 	}

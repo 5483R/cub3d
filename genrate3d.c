@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   genrate3d.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schoukou <schoukou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-kouc <ael-kouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 18:43:21 by schoukou          #+#    #+#             */
-/*   Updated: 2022/12/09 20:07:30 by schoukou         ###   ########.fr       */
+/*   Updated: 2022/12/11 10:06:23 by ael-kouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ int	rgb_to_int(int r, int g, int b)
 void	norm_generate3d(t_cubd *cub, int ray, double i)
 {
 	if (direction(cub, ray) == 1)
-		pixelput(cub, ray, i, pixelget(cub, cub->norm.textureoffset_x,
-				cub->norm.textureoffset_y, 0));
+		pixelput(cub, ray, i, pixelget(cub, cub->norm.txoffset_x,
+				cub->norm.txoffset_y, 0));
 	if (direction(cub, ray) == 3)
-		pixelput(cub, ray, i, pixelget(cub, cub->norm.textureoffset_x,
-				cub->norm.textureoffset_y, 1));
+		pixelput(cub, ray, i, pixelget(cub, cub->norm.txoffset_x,
+				cub->norm.txoffset_y, 1));
 	if (direction(cub, ray) == 2)
-		pixelput(cub, ray, i, pixelget(cub, cub->norm.textureoffset_x,
-				cub->norm.textureoffset_y, 2));
+		pixelput(cub, ray, i, pixelget(cub, cub->norm.txoffset_x,
+				cub->norm.txoffset_y, 2));
 	if (direction(cub, ray) == 4)
-		pixelput(cub, ray, i, pixelget(cub, cub->norm.textureoffset_x,
-				cub->norm.textureoffset_y, 3));
+		pixelput(cub, ray, i, pixelget(cub, cub->norm.txoffset_x,
+				cub->norm.txoffset_y, 3));
 }
 
 void	generate3d(t_cubd *cub)
@@ -65,13 +65,13 @@ void	generate3d(t_cubd *cub)
 		j = 0;
 		j = generate3d_sky(cub, j, ray);
 		i = j;
-		cub->norm.textureoffset_x = return_offsetx(cub, ray);
+		cub->norm.txoffset_x = return_offsetx(cub, ray);
 		while (i < cub->rays[ray]->wallbottompixel)
 		{
 			cub->norm.distancefromtop = i + (cub->rays[ray]->wallsheight / 2)
 				- (WIN_HIGHT / 2);
-			cub->norm.textureoffset_y = cub->norm.distancefromtop
-				* ((float)TILE_SIZE / cub->rays[ray]->wallsheight);
+			cub->norm.txoffset_y = cub->norm.distancefromtop
+				* ((double)TILE_SIZE / cub->rays[ray]->wallsheight);
 			norm_generate3d(cub, ray, i);
 			i++;
 		}
